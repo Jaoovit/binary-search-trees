@@ -6,14 +6,21 @@ class Node {
   }
 }
 
-/*
-
 function buildTree(array) {
-  const mid = array.length / 2;
-  return array[mid];
-}
+  if (array.length === 0) {
+    return null;
+  }
 
-*/
+  const mid = Math.floor(array.length / 2);
+  const root = new Node(array[mid]);
+
+  const queue = [
+    [root, [0, mid - 1]],
+    [root, [mid + 1, array.length - 1]],
+  ];
+
+  return queue;
+}
 
 class Tree {
   constructor(array) {
@@ -24,9 +31,8 @@ class Tree {
 
 const node = new Node();
 const tree = new Tree(
-  [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324],
+  [1, 4, 6, 10, 15, 19, 23, 36, 49, 57, 62, 70],
   buildTree([])
 );
 
-console.log(node);
 console.log(tree);
