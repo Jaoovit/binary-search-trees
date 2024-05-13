@@ -19,7 +19,35 @@ function buildTree(array) {
     [root, [mid + 1, array.length - 1]],
   ];
 
-  return queue;
+  while (queue.length > 0) {
+    const [parent, [left, right]] = queue.shift();
+
+    if (left <= right && parent != null) {
+      const mid = Math.floor((left + right) / 2);
+      const child = new Node(array[mid]);
+
+      if (array[mid] < parent.val) {
+        parent.left = child;
+      } else {
+        parent.right = child;
+      }
+
+      queue.push([child, [left, mid - 1]]);
+      queue.push([child, [mid + 1, right]]);
+    }
+  }
+
+  return root;
+}
+
+function printBST(root) {
+  if (root === null) {
+    return;
+  }
+
+  console.log(root.val + " ");
+  printBST(root.left);
+  printBST(root.right);
 }
 
 class Tree {
